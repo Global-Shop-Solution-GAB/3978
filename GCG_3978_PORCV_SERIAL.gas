@@ -1,0 +1,480 @@
+Program.Sub.ScreenSU.Start
+gui.FormPORcpt..create
+gui.FormPORcpt..caption("Assign Serial Numbers")
+gui.FormPORcpt..size(7725,6900)
+gui.FormPORcpt..minx(0)
+gui.FormPORcpt..miny(0)
+gui.FormPORcpt..position(0,0)
+gui.FormPORcpt..event(unload,formporcpt_unload)
+gui.FormPORcpt..alwaysontop(False)
+gui.FormPORcpt..fontname("Arial")
+gui.FormPORcpt..fontsize(8)
+gui.FormPORcpt..forecolor(0)
+gui.FormPORcpt..fontstyle(,,,,)
+gui.FormPORcpt..BackColor(-2147483633)
+gui.FormPORcpt..controlbox(True)
+gui.FormPORcpt..maxbutton(False)
+gui.FormPORcpt..minbutton(True)
+gui.FormPORcpt..mousepointer(0)
+gui.FormPORcpt..moveable(True)
+gui.FormPORcpt..sizeable(False)
+gui.FormPORcpt..ShowInTaskBar(True)
+gui.FormPORcpt..titlebar(True)
+gui.FormPORcpt.lblPurchaseOrder.create(label,"PO#:",True,540,255,1,200,200,True,0,Arial,8,-2147483633,0)
+gui.FormPORcpt.lblPurchaseOrder.defaultvalue("")
+gui.FormPORcpt.lblPurchaseOrder.controlgroup(0)
+gui.FormPORcpt.txtPO.create(textbox,"",True,915,300,0,200,400,False,0,Arial,8,-2147483643,1)
+gui.FormPORcpt.txtPO.defaultvalue("")
+gui.FormPORcpt.txtPO.controlgroup(0)
+gui.FormPORcpt.txtPOLine.create(textbox,"",True,480,300,0,1200,400,False,0,Arial,8,-2147483643,1)
+gui.FormPORcpt.txtPOLine.defaultvalue("")
+gui.FormPORcpt.txtPOLine.controlgroup(0)
+gui.FormPORcpt.lblPOLine.create(label,"Line:",True,420,240,1,1215,200,True,0,Arial,8,-2147483633,0)
+gui.FormPORcpt.lblPOLine.defaultvalue("")
+gui.FormPORcpt.lblPOLine.controlgroup(0)
+gui.FormPORcpt.gsfgSerials.create(gsflexgrid)
+gui.FormPORcpt.gsfgSerials.FixedRows(0)
+gui.FormPORcpt.gsfgSerials.FixedCols(0)
+gui.FormPORcpt.gsfgSerials.visible(True)
+gui.FormPORcpt.gsfgSerials.size(7080,4275)
+gui.FormPORcpt.gsfgSerials.zorder(0)
+gui.FormPORcpt.gsfgSerials.position(200,1335)
+gui.FormPORcpt.gsfgSerials.enabled(True)
+gui.FormPORcpt.cmdOk.create(button)
+gui.FormPORcpt.cmdOk.caption("Ok")
+gui.FormPORcpt.cmdOk.visible(True)
+gui.FormPORcpt.cmdOk.size(855,375)
+gui.FormPORcpt.cmdOk.zorder(0)
+gui.FormPORcpt.cmdOk.position(200,5800)
+gui.FormPORcpt.cmdOk.enabled(True)
+gui.FormPORcpt.cmdOk.fontname("Arial")
+gui.FormPORcpt.cmdOk.fontsize(8)
+gui.FormPORcpt.cmdOk.event(click,cmdok_click)
+gui.FormPORcpt.cmdOk.defaultvalue("")
+gui.FormPORcpt.cmdOk.controlgroup(0)
+gui.FormPORcpt.txtPart.create(textbox,"",True,1635,300,0,1775,400,False,0,Arial,8,-2147483643,1)
+gui.FormPORcpt.txtPart.defaultvalue("")
+gui.FormPORcpt.txtPart.controlgroup(0)
+gui.FormPORcpt.lblPart.create(label,"Part:",True,1935,255,1,1800,200,True,0,Arial,8,-2147483633,0)
+gui.FormPORcpt.lblPart.defaultvalue("")
+gui.FormPORcpt.lblPart.controlgroup(0)
+gui.FormPORcpt.lblPartDesc.create(label,"Description:",True,1740,255,1,3500,200,True,0,Arial,8,-2147483633,0)
+gui.FormPORcpt.lblPartDesc.defaultvalue("")
+gui.FormPORcpt.lblPartDesc.controlgroup(0)
+gui.FormPORcpt.txtPartDesc.create(textbox,"",True,3045,300,0,3500,400,False,0,Arial,8,-2147483643,1)
+gui.FormPORcpt.txtPartDesc.defaultvalue("")
+gui.FormPORcpt.txtPartDesc.controlgroup(0)
+gui.FormPORcpt.txtQty.create(textbox,"",True,645,300,0,6600,400,False,0,Arial,8,-2147483643,1)
+gui.FormPORcpt.txtQty.defaultvalue("")
+gui.FormPORcpt.txtQty.controlgroup(0)
+gui.FormPORcpt.lblQty.create(label,"Qty:",True,465,255,1,6600,200,True,0,Arial,8,-2147483633,0)
+gui.FormPORcpt.lblQty.defaultvalue("")
+gui.FormPORcpt.lblQty.controlgroup(0)
+gui.FormPORcpt.txtMfgPart.create(textbox,"",True,2400,300,0,200,1000,True,0,Arial,8,-2147483643,1)
+gui.FormPORcpt.txtMfgPart.event(keypressenter,txtmfgpart_keypressenter)
+gui.FormPORcpt.txtMfgPart.defaultvalue("")
+gui.FormPORcpt.txtMfgPart.controlgroup(0)
+gui.FormPORcpt.lblMfgPartNumber.create(label,"Manufacturer Part #:",True,1935,255,1,200,800,True,0,Arial,8,-2147483633,0)
+gui.FormPORcpt.lblMfgPartNumber.defaultvalue("")
+gui.FormPORcpt.lblMfgPartNumber.controlgroup(0)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.Global.iQty.Declare(Float,0)
+Variable.Global.sPart.Declare(String)
+Variable.Global.sLot.Declare(String)
+Variable.Global.sBin.Declare(String)
+Variable.Global.sPO.Declare(String)
+Variable.Global.sLine.Declare(String)
+Variable.Global.sDesc.Declare(String)
+Variable.UDT.uGrid.Define("Row",Long)
+Variable.UDT.uGrid.Define("Serial",String)
+Variable.UDT.uGrid.Define("Mfg_Serial",String)
+Variable.uGlobal.uGrid.Declare("uGrid")
+Variable.Global.sLastSN.Declare(String)
+Variable.Global.sVendor.Declare(String)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'Coded BY SFF
+'Hook 16400 PO Receipts Lot/Serial Populate
+
+'Open connection
+F.ODBC.Connection!conX.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+'Get all passed info and show form and set focus to Manufacturer part
+F.Intrinsic.Control.CallSub(Setpassedvars)
+F.Intrinsic.Control.CallSub(Buildstyle)
+F.Intrinsic.Control.CallSub(Loadlinedetail)
+F.Intrinsic.Control.CallSub(Loadgrid)
+Gui.FormPORcpt..Show
+Gui.FormPORcpt.txtMfgPart.SetFocus
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_PORCV_SERIAL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+Program.Sub.BuildStyle.Start
+F.Intrinsic.Control.SetErrorHandler("BuildStyle_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'set build style for grid. 2 columns for Component Serial# and MFG Serial#
+'Build Style 1 for Serials Loaded, BuildStyle 2 for Fixed header row
+
+Gui.FormPORcpt.gsfgSerials.Cols(3)
+Gui.FormPORcpt.gsfgSerials.Rows(2)
+Gui.FormPORcpt.gsfgSerials.FixedRows(1)
+Gui.FormPORcpt.gsfgSerials.FixedCols(1)
+
+'Row # in Grid
+Gui.FormPORcpt.gsfgSerials.TextMatrix(0,0,"")
+Gui.FormPORcpt.gsfgSerials.BuildStyle(0,0,"Type","Locked",True)
+Gui.FormPORcpt.gsfgSerials.BuildStyle(1,0,"Format","Alignment",2)
+Gui.FormPORcpt.gsfgSerials.BuildStyle(2,0,"Fontstyle","Bold",True)
+Gui.FormPORcpt.gsfgSerials.BuildStyle(2,0,"Format","Alignment",2)
+Gui.FormPORcpt.gsfgSerials.BuildStyle(2,0,"Type","Locked",True)
+Gui.FormPORcpt.gsfgSerials.BuildStyle(1,0,"Type","Locked",True)
+
+'Component Serial #'s
+Gui.FormPORcpt.gsfgSerials.TextMatrix(1,0,"Component S/N")
+Gui.FormPORcpt.gsfgSerials.BuildStyle(0,1,"Type","Locked",True)
+Gui.FormPORcpt.gsfgSerials.BuildStyle(1,1,"Format","Alignment",2)
+Gui.FormPORcpt.gsfgSerials.BuildStyle(2,1,"Fontstyle","Bold",True)
+Gui.FormPORcpt.gsfgSerials.BuildStyle(2,1,"Format","Alignment",2)
+Gui.FormPORcpt.gsfgSerials.BuildStyle(1,1,"Type","Locked",True)
+Gui.FormPORcpt.gsfgSerials.BuildStyle(2,1,"Type","Locked",True)
+
+'MFG Serials
+Gui.FormPORcpt.gsfgSerials.TextMatrix(2,0,"MFG S/N")
+Gui.FormPORcpt.gsfgSerials.BuildStyle(1,2,"Format","Alignment",2)
+Gui.FormPORcpt.gsfgSerials.BuildStyle(2,2,"Fontstyle","Bold",True)
+Gui.FormPORcpt.gsfgSerials.BuildStyle(2,2,"Format","Alignment",2)
+
+'Fixed Row Bolded
+Gui.FormPORcpt.gsfgSerials.ApplyStyle(0,2)
+
+'move down grid when carriage return is passed in cell
+Gui.FormPORcpt.gsfgSerials.SetProperty("ENTER",1)
+
+Gui.FormPORcpt.gsfgSerials.SetColumnPercentages(".10:.45:.45")
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("BuildStyle_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_PORCV_SERIAL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.BuildStyle.End
+
+Program.Sub.SetPassedVars.Start
+F.Intrinsic.Control.SetErrorHandler("SetPassedVars_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSql.Declare(String)
+'Part 000001
+'Lot 000061 - 15
+'Bin 000062 - 6 - but get default BIN verified
+'Serial 000065 - for screen above grid
+'PO Qty 000071
+'PO Num 009000
+'PO line 009001
+
+V.Global.iQty.Set(V.Passed.000137)
+F.Intrinsic.Control.If(V.Global.iQty,<,1)
+	F.Intrinsic.UI.Msgbox("Must have qty > than 0","Invalid Qty")
+	F.Intrinsic.Control.End
+F.Intrinsic.Control.EndIf
+V.Global.sPart.Set(V.Passed.000001)
+'Check to see if part is flagged as serialized, if not end program
+F.Intrinsic.String.Build("Select FLAG_SERIALIZE from V_INVENTORY_MSTR where PART = '{0}'",V.Global.sPart.Trim,V.Local.sSql)
+F.ODBC.Connection!conX.OpenRecordsetRO("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,=,True)
+	F.Intrinsic.Control.If(V.ODBC.conX!rst.FieldValTrim!FLAG_SERIALIZE,<>,"Y")
+		F.Intrinsic.Control.End
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+F.ODBC.conX!rst.Close
+'Default Bin
+V.Global.sBin.Set(V.passed.000062)
+'Set Lot to Blank
+V.Passed.000061.Set("")
+V.Global.sPO.Set(V.Passed.009000)
+F.Intrinsic.String.RPad(V.Passed.009001,"0",4,V.Global.sLine)
+'get Vendor
+F.Intrinsic.String.Build("Select Vendor from V_PO_HEADER where PURCHASE_ORDER = '{0}'",V.Global.sPO,V.Global.sVendor)
+F.ODBC.Connection!conX.OpenRecordsetRO("rst",V.Global.sVendor)
+F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+	V.Global.sVendor.Set(V.ODBC.conX!rst.FieldValTrim!Vendor)
+F.Intrinsic.Control.EndIf
+F.ODBC.conX!rst.Close
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("SetPassedVars_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_PORCV_SERIAL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.End
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.SetPassedVars.End
+
+Program.Sub.LoadLineDetail.Start
+F.Intrinsic.Control.SetErrorHandler("LoadLineDetail_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'load PO Line Data to Screen
+Gui.FormPORcpt.txtPO.Text(V.Global.sPO)
+'Line
+Gui.FormPORcpt.txtPOLine.Text(V.passed.009001)
+'Part
+Gui.FormPORcpt.txtPart.Text(V.Global.sPart)
+'Description
+Gui.FormPORcpt.txtPartDesc.Text(V.Passed.000003)
+'Qty
+Gui.FormPORcpt.txtQty.Text(V.Global.iQty)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("LoadLineDetail_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_PORCV_SERIAL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.LoadLineDetail.End
+
+Program.Sub.LoadGrid.Start
+F.Intrinsic.Control.SetErrorHandler("LoadGrid_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iID.Declare(Long)
+V.Local.i.Declare(Long)
+V.Local.iUB.Declare(Long)
+V.Local.sSql.Declare(String)
+V.Local.sID.Declare(String)
+
+'get qty and redim uGrid to Qty size
+V.Local.i.Set(V.Global.iQty)
+F.Intrinsic.Math.Sub(V.Local.i,1,V.Local.i)
+V.Local.iUB.Set(0)
+V.uGlobal.uGrid.Redim(0,V.Local.i)
+
+'Get last serial number used from "GCG_3978_COMP_SERIAL" where PART = Part on PO Line(global.sPart)
+F.Intrinsic.String.Build("Select Top 1 Serial as REC_ID from GCG_3978_COMP_SERIAL where part = '{0}' order by SERIAL desc",V.Global.sPart,V.Local.sSql)
+F.ODBC.Connection!conX.OpenRecordsetRO("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+	V.Local.iID.Set(V.ODBC.conX!rst.FieldVal!REC_ID)
+	F.Intrinsic.Math.Add(V.Local.iID,1,V.Local.iID)
+F.Intrinsic.Control.Else
+	V.Local.iID.Set(1)
+F.Intrinsic.Control.EndIf
+F.ODBC.conX!rst.Close
+'Make sure ID is not 0
+F.Intrinsic.Control.If(V.Local.iID,=,0)
+	V.Local.iID.Set(1)
+F.Intrinsic.Control.EndIf
+'Set global to be passed to core screen for number of recs
+V.Global.sLastSN.Set(V.Local.iID)
+F.Intrinsic.String.LPad(V.Global.sLastSN,"0",5,V.Global.sLastSN)
+
+'load incremented serials to UDT, then to grid
+F.Intrinsic.Control.For(V.Local.i,1,V.Global.iQty,1)
+	V.uGlobal.uGrid(v.Local.iUB)!Row.Set(V.Local.i)
+	F.Intrinsic.String.ConvertToString(V.Local.iID,V.Local.sID)
+	F.Intrinsic.String.LPad(V.Local.sID,"0",5,V.Local.sID)
+'	F.Intrinsic.String.Build("SN-{0}",V.Local.sID,V.Local.sID)
+	V.uGlobal.uGrid(v.Local.iUB)!Serial.Set(V.Local.sID)
+	V.uGlobal.uGrid(v.Local.iUB)!Mfg_Serial.Set("")
+	F.Intrinsic.Math.Add(V.Local.iID,1,V.Local.iID)
+	F.Intrinsic.Math.Add(V.Local.iUB,1,V.Local.iUB)
+F.Intrinsic.Control.Next(V.Local.i)
+Gui.FormPORcpt.gsfgSerials.LoadFromUDT("v.uglobal.uGrid","Row::0*!*Serial::1*!*MFG_SERAL::2",1)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("LoadGrid_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_PORCV_SERIAL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.LoadGrid.End
+
+Program.Sub.formporcpt_unload.Start
+F.Intrinsic.Control.SetErrorHandler("formporcpt_unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.Label("formporcpt_unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_PORCV_SERIAL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.formporcpt_unload.End
+
+Program.Sub.cmdok_click.Start
+F.Intrinsic.Control.SetErrorHandler("cmdok_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'save records to custom table
+V.Local.iRows.Declare(Long)
+V.Local.i.Declare(Long)
+V.Local.sRet.Declare(String)
+V.Local.sSql.Declare(String)
+V.Local.iRecID.Declare(Long)
+V.Local.sPO.Declare(String)
+V.Local.sLine.Declare(String)
+V.Local.sTemp.Declare(String)
+V.Local.sBDFRows.Declare(String)
+
+Gui.FormPORcpt.gsfgSerials.Commit
+'Get incremented REC_ID from table
+f.ODBC.Connection!conX.GetID("GCG_3978_COMP_SERIAL","REC_ID",true,v.Local.iRecID)
+Gui.FormPORcpt..Visible(false)
+F.Intrinsic.UI.InvokeWaitDialog("Please wait while Lot/Bin Grid Loads")
+'save grid to table GCG_3978_COMP_SERIAL and move to next line
+V.Local.iRows.Set(V.Screen.FormPORcpt!gsfgSerials.Rows)
+F.Intrinsic.Math.Sub(V.Local.iRows,1,V.Local.iRows)
+F.Intrinsic.Control.For(V.Local.i,1,V.Local.iRows,1)
+	F.Intrinsic.UI.ChangeWaitStatus("Please Wait While Serial Numbers are Loaded",V.Local.i,1,V.Local.iRows)
+	Gui.FormPORcpt.gsfgSerials.ReadRow(V.Local.i,V.Local.sRet)
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	F.ODBC.Connection!conX.OpenRecordsetRW("rst","Select * from GCG_3978_COMP_SERIAL")
+	F.ODBC.conX!rst.AddNew
+	F.ODBC.conX!rst.Set!REC_ID(V.Local.iRecID)
+	F.ODBC.conX!rst.Set!PART(V.Global.sPart)
+	F.ODBC.conX!rst.Set!SERIAL(V.Local.sRet(1).Trim)
+	F.ODBC.conX!rst.Set!MFG_PART(V.Screen.FormPORcpt!txtMfgPart.Text)
+	F.ODBC.conX!rst.Set!MFG_SERIAL(V.Local.sRet(2).Trim)
+	F.ODBC.conX!rst.Set!PURCHASE_ORDER(V.Global.sPO)
+	F.ODBC.conX!rst.Set!PO_LINE(V.Global.sLine)
+	F.ODBC.conX!rst.Set!VENDOR(V.Global.sVendor)
+	F.ODBC.conX!rst.Set!ASSIGNED(0)
+	F.ODBC.conX!rst.Update
+	F.ODBC.conX!rst.Close
+	F.Intrinsic.Math.Add(V.Local.iRecID,1,V.Local.iRecID)
+	'build bdf rows that will be passed to the next sub below
+	F.Intrinsic.String.Build("{0}|~|{1}|~|{2}|~|{3}|~|{4}|~|{5}|~|{6}|~|{7}","Y","",V.Global.sBin,"","",V.Local.sRet(1).Trim,"1","1",V.Local.sTemp)
+	F.Intrinsic.String.Build("{0}{1}{2}",V.Local.sBDFRows,V.Local.sTemp,V.Ambient.NewLine,V.Local.sBDFRows)
+
+F.Intrinsic.Control.Next(V.Local.i)
+
+
+'post back to core screen
+F.Intrinsic.Control.CallSub(Loadlotserial,"sRows",V.Local.sBDFRows)
+
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdok_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_PORCV_SERIAL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.cmdok_click.End
+
+Program.Sub.LoadLotSerial.Start
+F.Intrinsic.Control.SetErrorHandler("LoadLotSerial_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iRows.Declare(String)
+V.Local.sRow.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.i.Declare(Long)
+V.Local.sFile.Declare(String)
+
+'Load Core Screen parameters above grid with details to generate serial numbers
+'When user hits save on the core screen this will generate the same internal serial numbers that were created in the GAB screen for that part
+'set po qty to 1
+'V.Passed.000071.Set(1)
+''set inv qty to 1
+'V.Passed.000072.Set(1)
+''total qty on line set for number of records to produce
+'V.Passed.000108.Set(V.Global.iQty)
+''Passed 5 digit serial to start with
+'V.Passed.000104.Set(V.Global.sLastSN)
+''Serial Prefix
+'V.Passed.000065.Set("SN-")
+
+F.IntrinsiC.UI.InvokeWaitDialog("Please Wait while Lot Bin Grid Loads")
+'**************testloadBDFwithpreloadedSN's
+F.Intrinsic.String.Split(V.Args.sRows,V.Ambient.newline,V.Local.sRet)
+F.Intrinsic.BDF.Load("AUX002","AUX002")
+F.Intrinsic.BDF.Clone("AUX002","Clone")
+F.Intrinsic.Control.For(V.Local.i,V.Local.sRet.LBound,V.Local.sRet.UBound,1)
+	F.Intrinsic.Control.If(V.Local.sRet(v.Local.i).Trim,<>,"")
+		F.Intrinsic.BDF.WriteRow("Clone",V.local.sRet(v.Local.i).Trim)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.i)
+F.Intrinsic.BDF.Save("Clone","AUX002")
+F.Intrinsic.UI.CloseWaitDialog
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("LoadLotSerial_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_PORCV_SERIAL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.LoadLotSerial.End
+
+Program.Sub.txtmfgpart_keypressenter.Start
+F.Intrinsic.Control.SetErrorHandler("txtmfgpart_keypressenter_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'based on scanner with carraige return or by pressing enter, it will move to the first empty cell to scan in mfg parts
+Gui.FormPORcpt.gsfgSerials.SetActiveCell(2,1)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("txtmfgpart_keypressenter_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_PORCV_SERIAL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.txtmfgpart_keypressenter.End
+
+Program.Sub.Comments.Start
+${$0$}$GCG_DD_PORCV_SERIAL$}$SUPERVSR$}$3/30/2015
+${$3$}$0$}$$}$-1$}$-1$}$$}$1/1/1900$}$Ran from Lot Serial Screen PO Receipts, pass qty recceving and launch screen that will allow user to enter in mfg serial numbers, and then load grid also with pre-populated internal serial numbers that will be used in the GSS lot bin serial system. The mfg serial along with everything else will be saved to custom table so that mfg serial will always have a unique record.
+Program.Sub.Comments.End
+
