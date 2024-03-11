@@ -1,0 +1,974 @@
+Program.Sub.ScreenSU.Start
+gui.F_AttachPart..create
+gui.F_AttachPart..caption("Attatch Serial #'s to Finished Good Part")
+gui.F_AttachPart..size(4485,8805)
+gui.F_AttachPart..minx(0)
+gui.F_AttachPart..miny(0)
+gui.F_AttachPart..position(0,0)
+gui.F_AttachPart..event(unload,f_AttachPart_unload)
+gui.F_AttachPart..alwaysontop(False)
+gui.F_AttachPart..fontname("Arial")
+gui.F_AttachPart..fontsize(8)
+gui.F_AttachPart..forecolor(0)
+gui.F_AttachPart..fontstyle(,,,,)
+gui.F_AttachPart..BackColor(-2147483633)
+gui.F_AttachPart..controlbox(True)
+gui.F_AttachPart..maxbutton(False)
+gui.F_AttachPart..minbutton(True)
+gui.F_AttachPart..mousepointer(0)
+gui.F_AttachPart..moveable(True)
+gui.F_AttachPart..sizeable(False)
+gui.F_AttachPart..ShowInTaskBar(True)
+gui.F_AttachPart..titlebar(True)
+gui.F_AttachPart.lblWorkOrder.create(label,"Work Order - Suffix",True,1440,255,1,125,200,True,0,Arial,8,-2147483633,0)
+gui.F_AttachPart.lblWorkOrder.defaultvalue("")
+gui.F_AttachPart.lblWorkOrder.controlgroup(0)
+gui.F_AttachPart.txtWorkOrder.create(textbox,"",True,900,300,0,110,400,True,0,Arial,8,-2147483643,1)
+gui.F_AttachPart.txtWorkOrder.event(keypressenter,txtworkorder_keypressenter)
+gui.F_AttachPart.txtWorkOrder.maxLength(6)
+gui.F_AttachPart.txtWorkOrder.defaultvalue("")
+gui.F_AttachPart.txtWorkOrder.controlgroup(0)
+gui.F_AttachPart.txtSuffix.create(textbox,"",True,480,300,0,1095,400,True,0,Arial,8,-2147483643,1)
+gui.F_AttachPart.txtSuffix.maxLength(3)
+gui.F_AttachPart.txtSuffix.event(lostfocus,txtsuffix_lostfocus)
+gui.F_AttachPart.txtSuffix.defaultvalue("")
+gui.F_AttachPart.txtSuffix.controlgroup(0)
+gui.F_AttachPart.cmdBrwsWO.create(button)
+gui.F_AttachPart.cmdBrwsWO.caption("^")
+gui.F_AttachPart.cmdBrwsWO.visible(True)
+gui.F_AttachPart.cmdBrwsWO.size(375,330)
+gui.F_AttachPart.cmdBrwsWO.zorder(0)
+gui.F_AttachPart.cmdBrwsWO.position(1620,385)
+gui.F_AttachPart.cmdBrwsWO.enabled(True)
+gui.F_AttachPart.cmdBrwsWO.fontname("Arial")
+gui.F_AttachPart.cmdBrwsWO.fontsize(8)
+gui.F_AttachPart.cmdBrwsWO.event(click,cmdbrwswo_click)
+gui.F_AttachPart.cmdBrwsWO.defaultvalue("")
+gui.F_AttachPart.cmdBrwsWO.controlgroup(0)
+gui.F_AttachPart.lblPart.create(label,"Part",True,1380,255,1,100,700,True,0,Arial,8,-2147483633,0)
+gui.F_AttachPart.lblPart.defaultvalue("")
+gui.F_AttachPart.lblPart.controlgroup(0)
+gui.F_AttachPart.txtPart.create(textbox,"",True,1905,300,0,100,900,False,0,Arial,8,-2147483643,1)
+gui.F_AttachPart.txtPart.defaultvalue("")
+gui.F_AttachPart.txtPart.controlgroup(0)
+gui.F_AttachPart.txtDesc.create(textbox,"",True,2070,300,0,2050,900,False,0,Arial,8,-2147483643,1)
+gui.F_AttachPart.txtDesc.defaultvalue("")
+gui.F_AttachPart.txtDesc.controlgroup(0)
+gui.F_AttachPart.lblDescription.create(label,"Description",True,2115,255,1,2065,700,True,0,Arial,8,-2147483633,0)
+gui.F_AttachPart.lblDescription.defaultvalue("")
+gui.F_AttachPart.lblDescription.controlgroup(0)
+gui.F_AttachPart.txtQty.create(textbox,"",True,390,300,0,3755,400,False,0,Arial,8,-2147483643,1)
+gui.F_AttachPart.txtQty.numericonly(2)
+gui.F_AttachPart.txtQty.defaultvalue("")
+gui.F_AttachPart.txtQty.controlgroup(0)
+gui.F_AttachPart.lblQty.create(label,"Qty",True,660,255,1,3760,200,True,0,Arial,8,-2147483633,0)
+gui.F_AttachPart.lblQty.defaultvalue("")
+gui.F_AttachPart.lblQty.controlgroup(0)
+gui.F_AttachPart.gsflgAttPart.create(gsflexgrid)
+gui.F_AttachPart.gsflgAttPart.FixedRows(0)
+gui.F_AttachPart.gsflgAttPart.FixedCols(0)
+gui.F_AttachPart.gsflgAttPart.visible(True)
+gui.F_AttachPart.gsflgAttPart.size(4080,6330)
+gui.F_AttachPart.gsflgAttPart.zorder(0)
+gui.F_AttachPart.gsflgAttPart.position(55,1380)
+gui.F_AttachPart.gsflgAttPart.enabled(True)
+gui.F_AttachPart.gsflgAttPart.event(commandclick,gsflgattpart_commandclick)
+gui.F_AttachPart.cmdSavePart.create(button)
+gui.F_AttachPart.cmdSavePart.caption("Save")
+gui.F_AttachPart.cmdSavePart.visible(True)
+gui.F_AttachPart.cmdSavePart.size(855,375)
+gui.F_AttachPart.cmdSavePart.zorder(0)
+gui.F_AttachPart.cmdSavePart.position(100,7800)
+gui.F_AttachPart.cmdSavePart.enabled(True)
+gui.F_AttachPart.cmdSavePart.fontname("Arial")
+gui.F_AttachPart.cmdSavePart.fontsize(8)
+gui.F_AttachPart.cmdSavePart.event(click,cmdsavepart_click)
+gui.F_AttachPart.cmdSavePart.defaultvalue("")
+gui.F_AttachPart.cmdSavePart.controlgroup(0)
+gui.F_AttachPart.txtOrderNo.create(textbox,"",True,1020,300,0,2070,400,False,0,Arial,8,-2147483643,1)
+gui.F_AttachPart.txtOrderNo.defaultvalue("")
+gui.F_AttachPart.txtOrderNo.controlgroup(0)
+gui.F_AttachPart.lblOrderNo.create(label,"Order No",True,885,255,1,2100,200,True,0,Arial,8,-2147483633,0)
+gui.F_AttachPart.lblOrderNo.defaultvalue("")
+gui.F_AttachPart.lblOrderNo.controlgroup(0)
+gui.F_AttachPart.txtOrderLn.create(textbox,"",True,540,300,0,3155,400,False,0,Arial,8,-2147483643,1)
+gui.F_AttachPart.txtOrderLn.defaultvalue("")
+gui.F_AttachPart.txtOrderLn.controlgroup(0)
+gui.F_AttachPart.lblOrderLn.create(label,"Line #",True,525,270,1,3175,200,True,0,Arial,8,-2147483633,0)
+gui.F_AttachPart.lblOrderLn.defaultvalue("")
+gui.F_AttachPart.lblOrderLn.controlgroup(0)
+
+
+gui.F_AsgnCompSerials..create
+gui.F_AsgnCompSerials..caption("Assign Component Serials")
+gui.F_AsgnCompSerials..size(8955,6885)
+gui.F_AsgnCompSerials..minx(0)
+gui.F_AsgnCompSerials..miny(0)
+gui.F_AsgnCompSerials..position(0,0)
+gui.F_AsgnCompSerials..event(unload,F_AsgnCompSerials_unload)
+gui.F_AsgnCompSerials..alwaysontop(False)
+gui.F_AsgnCompSerials..fontname("Arial")
+gui.F_AsgnCompSerials..fontsize(8)
+gui.F_AsgnCompSerials..forecolor(0)
+gui.F_AsgnCompSerials..fontstyle(,,,,)
+gui.F_AsgnCompSerials..BackColor(-2147483633)
+gui.F_AsgnCompSerials..controlbox(True)
+gui.F_AsgnCompSerials..maxbutton(False)
+gui.F_AsgnCompSerials..minbutton(True)
+gui.F_AsgnCompSerials..mousepointer(0)
+gui.F_AsgnCompSerials..moveable(True)
+gui.F_AsgnCompSerials..sizeable(False)
+gui.F_AsgnCompSerials..ShowInTaskBar(True)
+gui.F_AsgnCompSerials..titlebar(True)
+gui.F_AsgnCompSerials.lblWorkOrder.create(label,"Work Order",True,1185,255,1,200,200,True,0,Arial,8,-2147483633,0)
+gui.F_AsgnCompSerials.lblWorkOrder.defaultvalue("")
+gui.F_AsgnCompSerials.lblWorkOrder.controlgroup(0)
+gui.F_AsgnCompSerials.txtWorkOrder.create(textbox,"",True,1215,300,0,200,400,False,0,Arial,8,-2147483643,1)
+gui.F_AsgnCompSerials.txtWorkOrder.defaultvalue("")
+gui.F_AsgnCompSerials.txtWorkOrder.controlgroup(0)
+gui.F_AsgnCompSerials.txtSuffix.create(textbox,"",True,540,300,0,1500,400,False,0,Arial,8,-2147483643,1)
+gui.F_AsgnCompSerials.txtSuffix.defaultvalue("")
+gui.F_AsgnCompSerials.txtSuffix.controlgroup(0)
+gui.F_AsgnCompSerials.lblSuffix.create(label,"Suffix",True,525,255,1,1500,200,True,0,Arial,8,-2147483633,0)
+gui.F_AsgnCompSerials.lblSuffix.defaultvalue("")
+gui.F_AsgnCompSerials.lblSuffix.controlgroup(0)
+gui.F_AsgnCompSerials.txtPart.create(textbox,"",True,1830,300,0,2100,400,False,0,Arial,8,-2147483643,1)
+gui.F_AsgnCompSerials.txtPart.defaultvalue("")
+gui.F_AsgnCompSerials.txtPart.controlgroup(0)
+gui.F_AsgnCompSerials.lblPart.create(label,"Part",True,1755,255,1,2100,200,True,0,Arial,8,-2147483633,0)
+gui.F_AsgnCompSerials.lblPart.defaultvalue("")
+gui.F_AsgnCompSerials.lblPart.controlgroup(0)
+gui.F_AsgnCompSerials.txtDesc.create(textbox,"",True,2580,300,0,4600,400,False,0,Arial,8,-2147483643,1)
+gui.F_AsgnCompSerials.txtDesc.defaultvalue("")
+gui.F_AsgnCompSerials.txtDesc.controlgroup(0)
+gui.F_AsgnCompSerials.lblDesc.create(label,"Description",True,1935,255,1,4600,200,True,0,Arial,8,-2147483633,0)
+gui.F_AsgnCompSerials.lblDesc.defaultvalue("")
+gui.F_AsgnCompSerials.lblDesc.controlgroup(0)
+gui.F_AsgnCompSerials.txtRev.create(textbox,"",True,570,300,0,4000,400,False,0,Arial,8,-2147483643,1)
+gui.F_AsgnCompSerials.txtRev.defaultvalue("")
+gui.F_AsgnCompSerials.txtRev.controlgroup(0)
+gui.F_AsgnCompSerials.lblRev.create(label,"Rev",True,510,255,1,4000,200,True,0,Arial,8,-2147483633,0)
+gui.F_AsgnCompSerials.lblRev.defaultvalue("")
+gui.F_AsgnCompSerials.lblRev.controlgroup(0)
+gui.F_AsgnCompSerials.gsfgAsgnCompSer.create(gsflexgrid)
+gui.F_AsgnCompSerials.gsfgAsgnCompSer.FixedRows(0)
+gui.F_AsgnCompSerials.gsfgAsgnCompSer.FixedCols(0)
+gui.F_AsgnCompSerials.gsfgAsgnCompSer.visible(True)
+gui.F_AsgnCompSerials.gsfgAsgnCompSer.size(8310,4905)
+gui.F_AsgnCompSerials.gsfgAsgnCompSer.zorder(0)
+gui.F_AsgnCompSerials.gsfgAsgnCompSer.position(200,795)
+gui.F_AsgnCompSerials.gsfgAsgnCompSer.enabled(True)
+gui.F_AsgnCompSerials.gsfgAsgnCompSer.event(checkclick,gsfgasgncompser_checkclick)
+gui.F_AsgnCompSerials.cmdSaveComp.create(button)
+gui.F_AsgnCompSerials.cmdSaveComp.caption("Save")
+gui.F_AsgnCompSerials.cmdSaveComp.visible(True)
+gui.F_AsgnCompSerials.cmdSaveComp.size(855,375)
+gui.F_AsgnCompSerials.cmdSaveComp.zorder(0)
+gui.F_AsgnCompSerials.cmdSaveComp.position(200,5800)
+gui.F_AsgnCompSerials.cmdSaveComp.enabled(True)
+gui.F_AsgnCompSerials.cmdSaveComp.fontname("Arial")
+gui.F_AsgnCompSerials.cmdSaveComp.fontsize(8)
+gui.F_AsgnCompSerials.cmdSaveComp.event(click,f_asgncompserials_unload)
+gui.F_AsgnCompSerials.cmdSaveComp.defaultvalue("")
+gui.F_AsgnCompSerials.cmdSaveComp.controlgroup(0)
+gui.F_AsgnCompSerials.txtPartSerial.create(textbox,"",True,1260,300,0,7230,400,False,0,Arial,8,-2147483643,1)
+gui.F_AsgnCompSerials.txtPartSerial.defaultvalue("")
+gui.F_AsgnCompSerials.txtPartSerial.controlgroup(0)
+gui.F_AsgnCompSerials.lblPartSerial.create(label,"Serial:",True,885,255,1,7245,200,True,0,Arial,8,-2147483633,0)
+gui.F_AsgnCompSerials.lblPartSerial.defaultvalue("")
+gui.F_AsgnCompSerials.lblPartSerial.controlgroup(0)
+gui.F_AsgnCompSerials.txtScanPart.create(textbox,"",True,2400,270,0,6055,5900,True,0,Arial,8,-2147483643,1)
+gui.F_AsgnCompSerials.txtScanPart.event(keypressenter,txtscanpart_keypressenter)
+gui.F_AsgnCompSerials.txtScanPart.defaultvalue("")
+gui.F_AsgnCompSerials.txtScanPart.controlgroup(0)
+gui.F_AsgnCompSerials.lblScanPart.create(label,"Scan Component Part:",True,2250,255,1,6085,5700,True,0,Arial,8,-2147483633,0)
+gui.F_AsgnCompSerials.lblScanPart.defaultvalue("")
+gui.F_AsgnCompSerials.lblScanPart.controlgroup(0)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.Global.sSerial.Declare(String)
+Variable.Global.sPart.Declare(String)
+Variable.Global.sWO.Declare(String)
+Variable.Global.sSuf.Declare(String)
+Variable.Global.sRev.Declare(String)
+Variable.Global.sDesc.Declare(String)
+Variable.Global.iQty.Declare(Float,0)
+Variable.Global.sPartScan.Declare(String)
+Variable.Global.sSNScan.Declare(String)
+Variable.Global.sSeq.Declare(String)
+Variable.Global.sPartRev.Declare(String)
+Variable.Global.sSO.Declare(String)
+Variable.Global.sSOLine.Declare(String)
+Variable.UDT.uComponents.Define("Serial",String,Serial_Number)
+Variable.UDT.uComponents.Define("Part",String,Part)
+Variable.UDT.uComponents.Define("Description",String,Description)
+Variable.UDT.uComponents.Define("FG_Serial",String)
+Variable.UDT.uComponents.Define("Selected",String)
+Variable.UDT.uComponents.Define("Sequence",String,Sequence)
+Variable.uGlobal.uComponents.Declare("uComponents")
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.ODBC.Connection!conX.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+'This Program is to attach Finished Good SN's to sub assemblies SN's
+
+V.uGlobal.uComponents.Redim(-1,-1)
+
+'if fired from WIP to FG set global variables automatically and load screen with data based on part
+F.Intrinsic.Control.If(V.Caller.Hook,=,16504)
+	V.Global.sWO.Set(V.Passed.000003)
+	V.Global.sSuf.Set(V.Passed.000004)
+	V.Global.iQty.Set(V.Passed.000015)
+	F.Intrinsic.Control.CallSub(Getpartinfo)
+	F.Intrinsic.Control.CallSub(Loadwodetail)
+	Gui.F_AttachPart.gsflgAttPart.Visible(false)
+	F.Intrinsic.Control.CallSub(Buildstylesattpart)
+	F.Intrinsic.Control.If(V.Global.iQty,>,0)
+		F.Intrinsic.Control.CallSub(Loadattachgrid)
+	F.Intrinsic.Control.EndIf
+	Gui.F_AttachPart.gsflgAttPart.Visible(true)
+	Gui.F_AttachPart.cmdSavePart.SetFocus
+F.Intrinsic.Control.Else
+	'ran from menu item
+	Gui.F_AttachPart.gsflgAttPart.Visible(false)
+	F.Intrinsic.Control.CallSub(Buildstylesattpart)
+	Gui.F_AttachPart.gsflgAttPart.Visible(True)
+	Gui.F_AttachPart.cmdBrwsWO.SetFocus
+F.Intrinsic.Control.EndIf
+
+Gui.F_AttachPart..Show
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_ATTACH.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+program.sub.f_asgncompserials_unload.start
+F.Intrinsic.Control.SetErrorHandler("F_AsgnCompSerials_unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'Hide Component screen when red X is pressed or SAVE on the Component screen
+Gui.F_AsgnCompSerials..Visible(false)
+Gui.F_AttachPart..Enabled(True)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("F_AsgnCompSerials_unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_ATTACH.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.f_asgncompserials_unload.end
+
+program.sub.cmdbrwswo_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdbrwswo_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'Browse for Work Order and Load Job,Sufix,Part, Description,Qty, Serials to screen
+V.Local.sSql.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.sCols.Declare(String)
+V.local.iWidths.Declare(String)
+
+F.Intrinsic.String.Split("2000*!*1000*!*2000*!*2000*!*1000","*!*",V.Local.iWidths)
+F.Intrinsic.String.Split("Job*!*Suffix*!*Part*!*Description*!*Qty","*!*",V.Local.sCols)
+V.Local.sSql.Set("Select Job,Suffix,Part,Description,Qty_Order from V_JOB_HEADER")
+
+F.Intrinsic.UI.Browser("Select Work Order","conX",V.Local.sSql,V.Local.sCols,V.Local.iWidths,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	'If there is a return, process Return
+	V.Global.sWO.Set(V.Local.sRet(0).Trim)
+	V.Global.sSuf.Set(V.Local.sRet(1).Trim)
+	V.Global.sPart.Set(V.Local.sRet(2).Trim)
+	V.Global.sDesc.Set(V.Local.sRet(3).Trim)
+	F.Intrinsic.Control.CallSub(Loadwodetail)
+	Gui.F_AttachPart.gsflgAttPart.Visible(false)
+	F.Intrinsic.Control.CallSub(Buildstylesattpart)
+	F.Intrinsic.Control.CallSub(Loadattachgrid)
+	Gui.F_AttachPart.gsflgAttPart.Visible(True)
+	V.uGlobal.uComponents.Redim(-1,-1)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdbrwswo_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_ATTACH.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdbrwswo_click.end
+
+program.sub.cmdsavepart_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdsavepart_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'Save Grid,Mark Assigned and Clear Screen
+V.Local.i.Declare(Long)
+V.Local.sSql.Declare(String)
+V.Local.bAssign.Declare(Boolean)
+V.Local.iRet.Declare(Long)
+
+'Set true first before looping through, if any are NOT assigned it will set it to FALSE
+V.Local.bAssign.Set(True)
+'loop through UDT uComponents and see if all Serialized componenets have a FG Serial Assigned to them
+F.Intrinsic.Control.For(V.Local.i,V.uGlobal.uComponents.LBound,V.uGlobal.uComponents.UBound,1)
+	F.Intrinsic.Control.If(V.uGlobal.uComponents(v.Local.i)!FG_Serial.Trim,=,"")
+		V.Local.bAssign.Set(False)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.i)
+
+'if bAssign = False then prompt user "Sure" they want to save
+F.Intrinsic.Control.If(V.Local.bAssign,=,False)
+	F.Intrinsic.UI.Msgbox("Some Components NOT Assigned! Continue?","Continue?",4,V.Local.iRet)
+	'Exit if they choose NO = 7
+	F.Intrinsic.Control.If(V.Local.iRet,=,7)
+		F.Intrinsic.Control.ExitSub
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+'loop through UDT and save the assignments
+F.Intrinsic.Control.For(V.Local.i,V.uGlobal.uComponents.LBound,V.uGlobal.uComponents.UBound,1)
+	'if Manufactured Subcomponent then save to GCG_3978_PART_SERIAL
+	F.Intrinsic.Control.If(V.uGlobal.uComponents(v.Local.i)!Sequence,=,"990000")
+		F.Intrinsic.String.Build("Select * from GCG_3978_PART_SERIAL where PART = '{0}' and SERIAL = '{1}'",V.uGlobal.uComponents(v.Local.i)!Part,V.uGlobal.uComponents(v.Local.i)!Serial,V.Local.sSql)
+		F.ODBC.Connection!conX.OpenRecordsetRW("rst",V.Local.sSql)
+		F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+			F.ODBC.conX!rst.Set!FG_SERIAL(V.uGlobal.uComponents(v.Local.i)!FG_Serial)
+			F.ODBC.conX!rst.Set!FG_Part(V.Screen.F_AsgnCompSerials!txtPart.Text)
+			F.ODBC.conX!rst.Update
+		F.Intrinsic.Control.EndIf
+		F.ODBC.conX!rst.Close
+	F.Intrinsic.Control.Else
+		'Else save to GCG_3978_COMP_SERIAL
+		F.Intrinsic.String.Build("Select * from GCG_3978_COMP_SERIAL where PART = '{0}' and SERIAL = '{1}'",V.uGlobal.uComponents(v.Local.i)!Part,V.uGlobal.uComponents(v.Local.i)!Serial,V.Local.sSql)
+		F.ODBC.Connection!conX.OpenRecordsetRW("rst",V.Local.sSql)
+		F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+			F.ODBC.conX!rst.Set!FG_SERIAL(V.uGlobal.uComponents(v.Local.i)!FG_Serial)
+			F.ODBC.conX!rst.Set!FG_Part(V.Screen.F_AsgnCompSerials!txtPart.Text)
+			F.ODBC.conX!rst.Update
+		F.Intrinsic.Control.EndIf
+		F.ODBC.conX!rst.Close
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.i)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdsavepart_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_ATTACH.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdsavepart_click.end
+
+Program.Sub.BuildStylesAttPart.Start
+F.Intrinsic.Control.SetErrorHandler("BuildStylesAttPart_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+Gui.F_AttachPart.gsflgAttPart.Cols(2)
+Gui.F_AttachPart.gsflgAttPart.Rows(1)
+Gui.F_AttachPart.gsflgAttPart.Rows(2)
+Gui.F_AttachPart.gsflgAttPart.FixedRows(1)
+
+'Build Styles for AttachPartScreen Grid
+'Internal Serial
+Gui.F_AttachPart.gsflgAttPart.TextMatrix(0,0,"Serial")
+Gui.F_AttachPart.gsflgAttPart.BuildStyle(1,0,"Format","Alignment",2)
+Gui.F_AttachPart.gsflgAttPart.BuildStyle(1,0,"Type","Locked",True)
+
+
+'Command Button to Assign Serials To Assemblies
+Gui.F_AttachPart.gsflgAttPart.TextMatrix(1,0,"Attach Component S/N's")
+Gui.F_AttachPart.gsflgAttPart.BuildStyle(2,1,"Format","Alignment",4)
+Gui.F_AttachPart.gsflgAttPart.BuildStyle(1,1,"Type","Command","+")
+Gui.F_AttachPart.gsflgAttPart.BuildStyle(1,1,"Format","Alignment",4)
+
+'ColumnPercentages
+Gui.F_AttachPart.gsflgAttPart.SetColumnPercentages(".6:.4")
+Gui.F_AttachPart.gsflgAttPart.ApplyStyle(1,1)
+Gui.F_AttachPart.gsflgAttPart.ApplyStyle(0,2)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("BuildStylesAttPart_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_ATTACH.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.BuildStylesAttPart.End
+
+Program.Sub.BuildStylesAsgnComp.Start
+F.Intrinsic.Control.SetErrorHandler("BuildStylesAsgnComp_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'Build Styles for Assign Components Screen
+
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.Cols(4)
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.Rows(1)
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.Rows(2)
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.FixedRows(1)
+
+'Selected
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.TextMatrix(0,0,"Assign")
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.BuildStyle(2,0,"Format","Alignment",4)
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.BuildStyle(1,0,"Type","Checkbox","")
+
+'Part
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.TextMatrix(1,0,"Part")
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.BuildStyle(2,1,"Format","Alignment",2)
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.BuildStyle(1,1,"Type","Locked",True)
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.BuildStyle(1,1,"Format","Alignment",2)
+
+'Description
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.TextMatrix(2,0,"Description")
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.BuildStyle(2,1,"Format","Alignment",2)
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.BuildStyle(1,2,"Type","Locked",True)
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.BuildStyle(1,2,"Format","Alignment",2)
+
+'Serial
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.TextMatrix(3,0,"Serial")
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.BuildStyle(2,1,"Format","Alignment",2)
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.BuildStyle(1,3,"Format","Alignment",2)
+
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.SetColumnPercentages(".1:.3:.4:.2")
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.ApplyStyle(0,2)
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.ApplyStyle(1,1)
+
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.SetProperty("Enter",1)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("BuildStylesAsgnComp_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_ATTACH.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.BuildStylesAsgnComp.End
+
+program.sub.gsflgattpart_commandclick.start
+F.Intrinsic.Control.SetErrorHandler("gsflgattpart_commandclick_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSerial.Declare(String)
+V.Local.sSql.Declare(String)
+
+'pass serial # from attach part screen to assembly screen for the row that is clicked
+Gui.F_AttachPart.gsflgAttPart.GetTextMatrix(0,V.Args.key,V.Local.sSerial)
+'exit if no serials loaded
+F.Intrinsic.Control.If(V.Local.sSerial.Trim,=,"")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+'set serial on component screen
+Gui.F_AsgnCompSerials.txtPartSerial.Text(V.Local.sSerial)
+
+'Build Style
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.Visible(True)
+Gui.F_AsgnCompSerials..Show
+F.Intrinsic.Control.CallSub(Buildstylesasgncomp)
+F.Intrinsic.Control.CallSub(Loadcompgrid)
+
+'disable screen
+Gui.F_AttachPart..Enabled(false)
+
+'show assembly screen
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("gsflgattpart_commandclick_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_ATTACH.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.gsflgattpart_commandclick.end
+
+program.sub.f_AttachPart_unload.start
+F.Intrinsic.Control.SetErrorHandler("f_AttachPart_unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'End Program if exited
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("f_AttachPart_unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_ATTACH.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.f_AttachPart_unload.end
+
+Program.Sub.LoadWODetail.Start
+F.Intrinsic.Control.SetErrorHandler("LoadWODetail_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSql.Declare(String)
+
+'call this sub to load screen detail in both cases from gui and menu
+Gui.F_AttachPart.txtDesc.Text(V.Global.sDesc)
+Gui.F_AttachPart.txtPart.Text(V.Global.sPart)
+Gui.F_AttachPart.txtQty.Text(V.Global.iQty)
+Gui.F_AttachPart.txtWorkOrder.Text(V.Global.sWO)
+Gui.F_AttachPart.txtSuffix.Text(V.Global.sSuf)
+
+Gui.F_AsgnCompSerials.txtDesc.Text(V.Global.sDesc)
+Gui.F_AsgnCompSerials.txtPart.Text(V.Global.sPart)
+Gui.F_AsgnCompSerials.txtSuffix.Text(V.Global.sSuf)
+Gui.F_AsgnCompSerials.txtWorkOrder.Text(V.Global.sWO)
+
+'Get Sales Order info if tied to sales order
+F.Intrinsic.String.Build("Select ORDER_NO,ORDER_LINE,substring(ORDER_LINE,1,3) as ORDER_LNTRIM from v_ORDER_TO_WO where Job = '{0}' and Suffix = '{1}'",V.Global.sWO,V.Global.sSuf,V.Local.sSql)
+F.ODBC.Connection!conX.OpenRecordsetRO("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+	V.Global.sSO.Set(V.ODBC.conX!rst.FieldValTrim!ORDER_NO)
+	Gui.F_AttachPart.txtOrderNo.Text(V.ODBC.conX!rst.FieldValTrim!ORDER_NO)
+	'set line number for sales order so it is saved to table same as order_lines table
+	V.Global.sSOLine.Set(V.ODBC.conX!rst.FieldValTrim!ORDER_LINE)
+	'trim for screen
+	Gui.F_AttachPart.txtOrderLn.Text(V.ODBC.conX!rst.FieldValTrim!ORDER_LNTRIM)
+F.Intrinsic.Control.EndIf
+F.ODBC.conX!rst.Close
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("LoadWODetail_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_ATTACH.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.LoadWODetail.End
+
+Program.Sub.LoadAttachGrid.Start
+F.Intrinsic.Control.SetErrorHandler("LoadAttachGrid_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'Load Attach Grid with Serial Numbers based on Qty
+V.Local.iSerial.Declare(Long)
+V.Local.sSerial.Declare(String)
+V.Local.i.Declare(Long)
+V.Local.iRows.Declare(Long)
+V.Local.sSql.Declare(String)
+
+'Get Last serial User for this part
+F.Intrinsic.String.Build("Select Serial_Number from v_item_history where PART = '{0}' and JOB = '{1}' and SUFFIX = '{2}' and sequence = '999999' and Quantity > 0 order by Serial_Number ASC",V.Global.sPart,V.Global.sWO,V.Global.sSuf,V.Local.sSql)
+F.ODBC.Connection!conX.OpenRecordsetRO("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+	Gui.F_AttachPart.gsflgAttPart.LoadRecordset("conX!rst",2,False)
+F.Intrinsic.Control.Else
+	F.Intrinsic.UI.Msgbox("WIP to FG must be done prior to Attaching","Process WIP to FG")
+	F.ODBC.conX!rst.Close
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+F.ODBC.conX!rst.Close
+'reset row count
+V.Local.iRows.Set(V.Screen.F_AttachPart!gsflgAttPart.Rows)
+F.Intrinsic.Math.Sub(V.Local.iRows,1,V.Local.iRows)
+Gui.F_AttachPart.gsflgAttPart.Rows(V.Local.iRows)
+'reapply styles
+F.Intrinsic.Math.Sub(V.Local.iRows,1,V.Local.iRows)
+F.Intrinsic.Control.For(V.Local.i,1,V.Local.iRows,1)
+	Gui.F_AttachPart.gsflgAttPart.ApplyStyle(V.Local.i,1)
+F.Intrinsic.Control.Next(V.Local.i)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("LoadAttachGrid_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_ATTACH.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.LoadAttachGrid.End
+
+Program.Sub.LoadCompGrid.Start
+F.Intrinsic.Control.SetErrorHandler("LoadCompGrid_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSql.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.sJob.Declare(String)
+V.Local.sSuffix.Declare(String)
+V.Local.sSeq.Declare(String)
+V.Local.i.Declare(Float)
+V.Local.iRows.Declare(Long)
+V.Local.sTemp.Declare(String)
+V.Local.sRow.Declare(String)
+
+'will be looping through the item master and loading available serial numbers that have been issued, to attach them to the FG part
+F.Intrinsic.Control.If(V.uGlobal.uComponents.UBound,=,-1)
+	'get material sequences and quantities from job_operations.
+	F.Intrinsic.String.Build("Select a.Part,b.Description ,a.SERIAL_NUMBER,a.Sequence from v_ITEM_HISTORY a left outer join v_inventory_mstr  b on a.part = b.part where a.job = '{0}' and a.suffix ='{1}' and a.REVERSED <> 'R' and a.sequence <> '999999' and a.Serial_Number <> '' ",V.Global.sWO,V.Global.sSuf,V.Local.sSql)
+	F.ODBC.Connection!conX.OpenRecordsetRW("rst",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+		F.Intrinsic.Variable.LoadUDTFromRecordset("conX","rst","v.uGlobal.uComponents",False)
+'		Gui.F_AsgnCompSerials.gsfgAsgnCompSer.LoadFromUDT("V.uGlobal.uComponents","Part::1*!*Description::2*!*Serial::3",1)
+	F.Intrinsic.Control.Else
+		F.ODBC.conX!rst.Close
+		F.Intrinsic.UI.Msgbox("No Serialized Components Issued to this Work Order","No Serialized Components")
+		F.Intrinsic.Control.ExitSub
+	F.Intrinsic.Control.EndIf
+	F.ODBC.conX!rst.Close
+
+	'if there is only 1 FG serial number, automatically associate all the serials to that finished good
+	F.Intrinsic.Control.If(V.Screen.F_AttachPart!gsflgAttPart.Rows,=,2)
+		F.Intrinsic.Math.Sub(V.Screen.F_AsgnCompSerials!gsfgAsgnCompSer.Rows,1,V.Local.iRows)
+		F.Intrinsic.Control.For(V.Local.i,1,V.Local.iRows,1)
+			Gui.F_AsgnCompSerials.gsfgAsgnCompSer.TextMatrix(0,V.Local.i,1)
+		F.Intrinsic.Control.Next(V.Local.i)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+'check to see if there are already assignments made in the custom tables, if so load those relationships
+F.Intrinsic.Control.CallSub(Checkassignments)
+
+'If UDT already loaded with issued materials then reload from UDT based on FG Serial Number selected, and also ones available for selection
+F.Intrinsic.Control.For(V.Local.i,V.uGlobal.uComponents.LBound,V.uGlobal.uComponents.UBound,1)
+	F.Intrinsic.Control.If(V.uGlobal.uComponents(v.Local.i)!FG_Serial,=,V.Screen.F_AsgnCompSerials!txtPartSerial.Text)
+		F.Intrinsic.String.Build("{0}*!*{1}*!*{2}*!*{3}",V.uGlobal.uComponents(v.Local.i)!Selected,V.uGlobal.uComponents(v.Local.i)!Part,V.uGlobal.uComponents(v.Local.i)!Description,V.uGlobal.uComponents(v.Local.i)!Serial,V.Local.sRow)
+		F.Intrinsic.String.Build("{0}{1}!*!",V.Local.sTemp,V.Local.sRow,V.Local.sTemp)
+	F.Intrinsic.Control.ElseIf(V.uGlobal.uComponents(v.Local.i)!FG_Serial.Trim,=,"")
+		F.Intrinsic.String.Build("{0}*!*{1}*!*{2}*!*{3}",V.uGlobal.uComponents(v.Local.i)!Selected,V.uGlobal.uComponents(v.Local.i)!Part,V.uGlobal.uComponents(v.Local.i)!Description,V.uGlobal.uComponents(v.Local.i)!Serial,V.Local.sRow)
+		F.Intrinsic.String.Build("{0}{1}!*!",V.Local.sTemp,V.Local.sRow,V.Local.sTemp)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.i)
+
+'reload grid
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.LoadFromString(V.Local.sTemp,1)
+'load recordset to grid, set focus to scan box,
+Gui.F_AsgnCompSerials.txtScanPart.SetFocus
+
+'if same serial is scanned twice just reselect the row in the grid
+
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("LoadCompGrid_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_ATTACH.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.LoadCompGrid.End
+
+Program.Sub.GetPartInfo.Start
+F.Intrinsic.Control.SetErrorHandler("GetPartInfo_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'If loaded from GUI then get part info
+V.Local.sSql.Declare(String)
+F.Intrinsic.String.Build("Select Part, Description,QTY_ORDER from V_JOB_HEADER where Job = '{0}' and Suffix = '{1}'",V.Global.sWO,V.Global.sSuf,V.Local.sSql)
+F.ODBC.Connection!conX.OpenRecordsetRO("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+	V.Global.sPart.Set(V.ODBC.conX!rst.FieldValTrim!Part)
+	V.Global.sDesc.Set(V.ODBC.conX!rst.FieldValTrim!Description)
+	'set Qty Order for screen?
+F.Intrinsic.Control.EndIf
+F.ODBC.conX!rst.Close
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("GetPartInfo_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_ATTACH.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.GetPartInfo.End
+
+program.sub.txtscanpart_keypressenter.start
+F.Intrinsic.Control.SetErrorHandler("txtscanpart_keypressenter_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'This barcode scan will be a fixed length all numeric value
+'if it has a leading zero then we compare it to the following
+'Bar Codeis '08000000012300004561' = 'P000-000123'  S/N '456'
+'
+'             zPPaaaBBBBBBrrSSSSSc
+'
+'             07304710005000000183<-real scan of P/N: 'I047-100050 'S/N:'18'
+'where z is a leading zero
+'
+'      P is the ASCII value of the letter 'I'
+'
+'      a is the first 3 digits before the '-'
+'
+'      B is the second 6 digits after the '-'
+'
+'      r is the rev which is blank (wedon'tshow'-00')
+'
+'      S is the 5 digit serial number
+'
+'    c is the check digit (Ignore)
+'********************************************
+''if it does NOT have leading zero then we compare it to the following
+
+'Bar Code is '65777171000000000011' = '7171AM-0000'  S/N '1'
+	'
+	'             AAMMddddNNNNrrSSSSSc
+	'    where A is the ASCII value of the first letter 'A'
+	'
+	'      M is the ASCII value of the second letter 'M'
+	'
+	'      d is the first 4 digits
+	'
+	'      N is the second 4 digits after the'-'
+	'
+	'      r is the rev which is blank(we don't show '-00')
+	'
+	'      S is the 5 digit serial number
+	'
+	'     c is the check digit(Ignore)
+'***********************************************
+V.Local.i.Declare(Float)
+V.Local.sRet.Declare(String)
+V.Local.sIdentifier.Declare(String)
+V.Local.iASCII.Declare(Float)
+V.Local.sPart1.Declare(String)
+V.Local.sPart2.Declare(String)
+V.Local.sPart3.Declare(String)
+V.Local.sPart.Declare(String)
+V.Local.sSerial.Declare(String)
+
+'First check length of value in the field where it is scanned
+V.Local.sRet.Set(V.Screen.F_AsgnCompSerials!txtScanPart.Text)
+F.Intrinsic.Control.If(V.Local.sRet.Trim,<>,"")
+	F.Intrinsic.String.Len(V.Local.sRet.Trim,V.Local.i)
+	F.Intrinsic.Control.If(V.Local.i,<>,20)
+		'exit process if it is not 20 characters because it is not a valid part number scanned
+		F.Intrinsic.Control.ExitSub
+	F.Intrinsic.Control.EndIf
+	
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("txtscanpart_keypressenter_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_ATTACH.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.txtscanpart_keypressenter.end
+
+program.sub.txtsuffix_lostfocus.start
+F.Intrinsic.Control.SetErrorHandler("txtsuffix_lostfocus_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSql.Declare(String)
+
+F.Intrinsic.String.Build("Select * from v_job_header where job = '{0}' and suffix = '{1}'",V.Screen.F_AttachPart!txtWorkOrder.Text,V.Screen.F_AttachPart!txtSuffix.Text,V.Local.sSql)
+F.ODBC.Connection!conX.OpenRecordsetRO("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+	V.Global.sPart.Set(V.ODBC.conX!rst.FieldValTrim!Part)
+	V.Global.sWO.Set(V.ODBC.conX!rst.FieldVal!JOB)
+	V.Global.sSuf.Set(V.ODBC.conX!rst.FieldVal!Suffix)
+	V.Global.sDesc.Set(V.ODBC.conX!rst.FieldVal!Description)
+	F.ODBC.conX!rst.Close
+	F.Intrinsic.Control.CallSub(Loadwodetail)
+	Gui.F_AttachPart.gsflgAttPart.Visible(false)
+	F.Intrinsic.Control.CallSub(Buildstylesattpart)
+	F.Intrinsic.Control.CallSub(Loadattachgrid)
+	Gui.F_AttachPart.gsflgAttPart.Visible(True)
+F.Intrinsic.Control.Else
+	F.ODBC.conX!rst.Close
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("txtsuffix_lostfocus_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_ATTACH.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.txtsuffix_lostfocus.end
+
+program.sub.txtworkorder_keypressenter.start
+F.Intrinsic.Control.SetErrorHandler("txtworkorder_keypressenter_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+Gui.F_AttachPart.txtSuffix.SetFocus
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("txtworkorder_keypressenter_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_ATTACH.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.txtworkorder_keypressenter.end
+
+program.sub.gsfgasgncompser_checkclick.start
+F.Intrinsic.Control.SetErrorHandler("gsfgasgncompser_checkclick_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'when clicked it will maintain the FG assignments in the UDT
+'it will se the FG_Serial to the current one based on a match of Component Part + Component Serial from the grid row that is checked
+V.Local.i.Declare(Long)
+V.Local.iRows.Declare(Long)
+V.Local.sRow.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.bSelected.Declare(Boolean)
+V.Local.bMatch.Declare(Boolean)
+
+Gui.F_AsgnCompSerials.gsfgAsgnCompSer.ReadRow(V.Args.Key,V.Local.sRow)
+F.Intrinsic.String.Split(V.Local.sRow,"*!*",V.Local.sRow)
+F.Intrinsic.Control.If(V.Local.sRow(0),=,1)
+	F.Intrinsic.Variable.UDTMultiSeekSet(V.uGlobal.uComponents!Part,V.Local.sRow(1),V.uGlobal.uComponents!Serial,V.Local.sRow(3),V.uGlobal.uComponents!FG_Serial,V.Screen.F_AsgnCompSerials!txtPartSerial.Text)
+	F.Intrinsic.Variable.UDTMultiSeekSet(V.uGlobal.uComponents!Part,V.Local.sRow(1),V.uGlobal.uComponents!Serial,V.Local.sRow(3),V.uGlobal.uComponents!Selected,"1")
+F.Intrinsic.Control.Else
+	F.Intrinsic.Variable.UDTMultiSeekSet(V.uGlobal.uComponents!Part,V.Local.sRow(1),V.uGlobal.uComponents!Serial,V.Local.sRow(3),V.uGlobal.uComponents!FG_Serial,"")
+	F.Intrinsic.Variable.UDTMultiSeekSet(V.uGlobal.uComponents!Part,V.Local.sRow(1),V.uGlobal.uComponents!Serial,V.Local.sRow(3),V.uGlobal.uComponents!Selected,"")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("gsfgasgncompser_checkclick_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_ATTACH.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.gsfgasgncompser_checkclick.end
+
+Program.Sub.CheckAssignments.Start
+F.Intrinsic.Control.SetErrorHandler("CheckAssignments_Err")
+F.Intrinsic.Control.ClearErrors
+'checks GCG_3978_COMP_SERIAL and sees if assignments have already been made to this FG serial number
+'if so it loads them
+V.Local.sError.Declare(String)
+V.Local.i.Declare(Long)
+V.Local.sSql.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.bStatus.Declare(Boolean)
+
+'loop through uComponents and check the GCG tables to if they are assigned to a FG Serial Already
+F.Intrinsic.Control.For(V.Local.i,V.uGlobal.uComponents.LBound,V.uGlobal.uComponents.UBound,1)
+	F.Intrinsic.Control.If(V.uGlobal.uComponents(v.Local.i)!Sequence,=,"990000")
+		'check GCG_3978_PART_SERIAL(Mfg SubComponents and Finished Goods Table
+		F.Intrinsic.String.Build("Select * from GCG_3978_PART_SERIAL where PART = '{0}' and SERIAL = '{1}'",V.uGlobal.uComponents(v.Local.i)!Part,V.uGlobal.uComponents(V.Local.i)!Serial,V.Local.sSql)
+		F.ODBC.Connection!conX.OpenRecordsetRO("rst",V.Local.sSql)
+		F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+			F.Intrinsic.Control.If(V.ODBC.conX!rst.FieldValTrim!FG_SERIAL,<>,"")
+				V.uGlobal.uComponents(v.Local.i)!FG_Serial.Set(V.ODBC.conX!rst.FieldValTrim!FG_SERIAL)
+				V.uGlobal.uComponents(v.Local.i)!Selected.Set("1")
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.EndIf
+		F.ODBC.conX!rst.Close
+	F.Intrinsic.Control.Else
+		'check GCG_3978_COMP_SERIAL(Purchased Components Serialized)
+		F.Intrinsic.String.Build("Select * from GCG_3978_COMP_SERIAL where PART = '{0}' and SERIAL = '{1}'",V.uGlobal.uComponents(v.Local.i)!Part,V.uGlobal.uComponents(V.Local.i)!Serial,V.Local.sSql)
+		F.ODBC.Connection!conX.OpenRecordsetRO("rst",V.Local.sSql)
+		F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+			F.Intrinsic.Control.If(V.ODBC.conX!rst.FieldValTrim!FG_SERIAL,<>,"")
+				V.uGlobal.uComponents(v.Local.i)!FG_Serial.Set(V.ODBC.conX!rst.FieldValTrim!FG_SERIAL)
+				V.uGlobal.uComponents(v.Local.i)!Selected.Set("1")
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.EndIf
+		F.ODBC.conX!rst.Close
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.i)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("CheckAssignments_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_ATTACH.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.CheckAssignments.End
+
+Program.Sub.LoadCompGridUDT.Start
+F.Intrinsic.Control.SetErrorHandler("LoadCompGridUDT_Err")
+F.Intrinsic.Control.ClearErrors
+'If UDT is already loaded, it loads the Component grid based on FG Serial that is selected at the time.
+V.Local.sError.Declare(String)
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("LoadCompGridUDT_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_ATTACH.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.LoadCompGridUDT.End
+
+Program.Sub.Comments.Start
+${$0$}$GCG_DD_ATTACH$}$SUPERVSR$}$2/11/2015
+${$3$}$0$}$$}$-1$}$-1$}$$}$1/1/1900$}$This screen auto populates with the total number of pieces on the Work Order and generates serial numbers if they haven't already been assigned for this job.  It will highlight the serial record line that was scanned.  A double click (or possible button beneath grid) will launch you into the Assign Assemblies screen.
+
+If running from a standard terminal with the full GSS menu, a custom menu item will be added that would allow you to browse WO and Suffix to then auto populate everything else, just as it did from the GUI.  It's also possible we would allow a scan or Part/Serial just as we are doing from the GUI to get us here as well.
+
+Table will store Part Number and last Serial Number used/assigned.
+
+***Assign Assemblies
+Assign Assemblies: From a shop floor GUI terminal or menu item
+This screen allows you to scan several barcodes (Part/Serial) at a time and add them to the appropriate level below.  Click Save when done.  If not all are added, you may go back into this screen at a later time to continue recording serial numbers.  If an item already in this list is re-scanned at a later date, the existing serial (most likely the same) will be overwritten.   Validate serial numbers will be done so that you will not be able to save a part-serial that's been already used on another work order.  When this does happen, GSS will prompt user to "Re-Use Part/Serial"…  if Yes is selected, GSS will allow and will write the existing to history w/ date.
+
+This screen will also be available in a read only mode for those that do not have the rights to edit.
+
+Program.Sub.Comments.End
+
