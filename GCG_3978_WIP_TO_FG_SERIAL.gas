@@ -1,0 +1,496 @@
+Program.Sub.ScreenSU.Start
+gui.SS_Form_WIP2FGSerial..create
+gui.SS_Form_WIP2FGSerial..caption("Assign Finished Good Serials")
+gui.SS_Form_WIP2FGSerial..size(2835,5865)
+gui.SS_Form_WIP2FGSerial..minx(0)
+gui.SS_Form_WIP2FGSerial..miny(0)
+gui.SS_Form_WIP2FGSerial..position(0,0)
+gui.SS_Form_WIP2FGSerial..event(unload,Unload)
+gui.SS_Form_WIP2FGSerial..alwaysontop(False)
+gui.SS_Form_WIP2FGSerial..fontname("Arial")
+gui.SS_Form_WIP2FGSerial..fontsize(8)
+gui.SS_Form_WIP2FGSerial..forecolor(0)
+gui.SS_Form_WIP2FGSerial..fontstyle(,,,,)
+gui.SS_Form_WIP2FGSerial..BackColor(-2147483633)
+gui.SS_Form_WIP2FGSerial..controlbox(True)
+gui.SS_Form_WIP2FGSerial..maxbutton(False)
+gui.SS_Form_WIP2FGSerial..minbutton(False)
+gui.SS_Form_WIP2FGSerial..mousepointer(0)
+gui.SS_Form_WIP2FGSerial..moveable(True)
+gui.SS_Form_WIP2FGSerial..sizeable(False)
+gui.SS_Form_WIP2FGSerial..ShowInTaskBar(True)
+gui.SS_Form_WIP2FGSerial..titlebar(True)
+gui.SS_Form_WIP2FGSerial.lbl_txtJob.create(label,"Work Order",True,1800,200,1,100,100,True,0,Arial,8,-2147483633,0)
+gui.SS_Form_WIP2FGSerial.lbl_txtJob.defaultvalue("")
+gui.SS_Form_WIP2FGSerial.lbl_txtJob.controlgroup(0)
+gui.SS_Form_WIP2FGSerial.txtJob.create(textbox,"",True,1215,330,0,100,300,False,0,Arial,8,16777215,1)
+gui.SS_Form_WIP2FGSerial.txtJob.defaultvalue("")
+gui.SS_Form_WIP2FGSerial.txtJob.controlgroup(0)
+gui.SS_Form_WIP2FGSerial.lbl_txtSuffix.create(label,"Suffix",True,1800,200,1,1500,100,True,0,Arial,8,-2147483633,0)
+gui.SS_Form_WIP2FGSerial.lbl_txtSuffix.defaultvalue("")
+gui.SS_Form_WIP2FGSerial.lbl_txtSuffix.controlgroup(0)
+gui.SS_Form_WIP2FGSerial.txtSuffix.create(textbox,"",True,870,330,0,1500,300,False,0,Arial,8,16777215,1)
+gui.SS_Form_WIP2FGSerial.txtSuffix.defaultvalue("")
+gui.SS_Form_WIP2FGSerial.txtSuffix.controlgroup(0)
+gui.SS_Form_WIP2FGSerial.lbl_txtPart.create(label,"Part",True,1800,200,1,100,700,True,0,Arial,8,-2147483633,0)
+gui.SS_Form_WIP2FGSerial.lbl_txtPart.defaultvalue("")
+gui.SS_Form_WIP2FGSerial.lbl_txtPart.controlgroup(0)
+gui.SS_Form_WIP2FGSerial.txtPart.create(textbox,"",True,2265,330,0,100,900,False,0,Arial,8,16777215,1)
+gui.SS_Form_WIP2FGSerial.txtPart.defaultvalue("")
+gui.SS_Form_WIP2FGSerial.txtPart.controlgroup(0)
+gui.SS_Form_WIP2FGSerial.gsfg_Serials.create(gsflexgrid)
+gui.SS_Form_WIP2FGSerial.gsfg_Serials.FixedRows(0)
+gui.SS_Form_WIP2FGSerial.gsfg_Serials.FixedCols(0)
+gui.SS_Form_WIP2FGSerial.gsfg_Serials.visible(True)
+gui.SS_Form_WIP2FGSerial.gsfg_Serials.size(2385,2580)
+gui.SS_Form_WIP2FGSerial.gsfg_Serials.zorder(0)
+gui.SS_Form_WIP2FGSerial.gsfg_Serials.position(70,2020)
+gui.SS_Form_WIP2FGSerial.gsfg_Serials.enabled(True)
+gui.SS_Form_WIP2FGSerial.cmdSave.create(button)
+gui.SS_Form_WIP2FGSerial.cmdSave.caption("Save")
+gui.SS_Form_WIP2FGSerial.cmdSave.visible(True)
+gui.SS_Form_WIP2FGSerial.cmdSave.size(855,375)
+gui.SS_Form_WIP2FGSerial.cmdSave.zorder(0)
+gui.SS_Form_WIP2FGSerial.cmdSave.position(100,4700)
+gui.SS_Form_WIP2FGSerial.cmdSave.enabled(True)
+gui.SS_Form_WIP2FGSerial.cmdSave.fontname("Arial")
+gui.SS_Form_WIP2FGSerial.cmdSave.fontsize(8)
+gui.SS_Form_WIP2FGSerial.cmdSave.event(click,cmdsave_click)
+gui.SS_Form_WIP2FGSerial.cmdSave.defaultvalue("")
+gui.SS_Form_WIP2FGSerial.cmdSave.controlgroup(0)
+gui.SS_Form_WIP2FGSerial.ddlFGOption.create(dropdownlist)
+gui.SS_Form_WIP2FGSerial.ddlFGOption.visible(True)
+gui.SS_Form_WIP2FGSerial.ddlFGOption.size(1455,330)
+gui.SS_Form_WIP2FGSerial.ddlFGOption.zorder(0)
+gui.SS_Form_WIP2FGSerial.ddlFGOption.position(100,1500)
+gui.SS_Form_WIP2FGSerial.ddlFGOption.enabled(True)
+gui.SS_Form_WIP2FGSerial.ddlFGOption.fontname("Arial")
+gui.SS_Form_WIP2FGSerial.ddlFGOption.fontsize(8)
+gui.SS_Form_WIP2FGSerial.ddlFGOption.defaultvalue("")
+gui.SS_Form_WIP2FGSerial.ddlFGOption.controlgroup(0)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.Global.sJob.Declare(String)
+
+Variable.Global.sSuf.Declare(String)
+
+Variable.Global.sPart.Declare(String)
+
+Variable.Global.iQty.Declare(Float,0)
+Variable.Global.sOrderNo.Declare(String)
+Variable.Global.sOrderLine.Declare(String)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'Coded By SFF
+'WIP to FG Serial fires on 16500  that will populate available serial numbers for the amount of finished good materials being passed on the screen
+
+F.ODBC.Connection!conX.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+F.Intrinsic.Control.If(V.Caller.Hook,=,16500)
+	F.Intrinsic.Control.CallSub(Getpassedvars)
+	F.Intrinsic.Control.CallSub(Buildstyle)
+	F.Intrinsic.Control.CallSub(Loadgrid)
+	Gui.SS_Form_WIP2FGSerial..Show
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.Caller.Hook,=,16521)
+	F.Intrinsic.Control.If(V.Passed.BTNHIT,=,"SAVE")
+		'if save is pressed to add a lot/serial record to grid, check v.passed.GLOBAL for existing serial numbers split on "*!*" and load the next one.
+		F.Intrinsic.Control.CallSub(Loadnextserial)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.Caller.Hook,=,16506)
+	'Delete saved Lot Serial Records that were done previously in the other screen
+	F.Intrinsic.Control.CallSub(Deletelotserial)
+F.Intrinsic.Control.EndIf
+
+'if user exits the WIP to FG Parent Screen jb0052
+F.Intrinsic.Control.If(V.Caller.Hook,=,16508)
+	F.Intrinsic.Control.CallSub(Deletelotserial)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_WIP_TO_FG_SERIAL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+Program.Sub.GetPassedVars.Start
+F.Intrinsic.Control.SetErrorHandler("GetPassedVars_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Global.sJob.Set(V.Passed.000005)
+V.Global.sSuf.Set(V.Passed.000006)
+V.Global.sPart.Set(V.Passed.000008)
+V.Global.iQty.Set(V.Passed.000015)
+V.Local.sSql.Declare(String)
+
+'get sales order and line if tied to work order
+F.Intrinsic.String.Build("Select ORDER_NO,ORDER_LINE from v_ORDER_TO_WO where JOB = '{0}' and SUFFIX = '{1}'",V.Global.sJob,V.Global.sSuf,V.Local.sSql)
+F.ODBC.Connection!conX.OpenRecordsetRO("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+	V.Global.sOrderNo.Set(V.ODBC.conX!rst.FieldValTrim!ORDER_NO)
+	V.Global.sOrderLine.Set(V.ODBC.conX!rst.FieldValTrim!ORDER_LINE)
+	F.Intrinsic.String.RPad(V.Global.sOrderLine,"0",4,V.Global.sOrderLine)
+F.Intrinsic.Control.EndIf
+F.ODBC.conX!rst.Close
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("GetPassedVars_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_WIP_TO_FG_SERIAL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.GetPassedVars.End
+
+Program.Sub.Unload.Start
+F.Intrinsic.Control.SetErrorHandler("Unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.Label("Unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_WIP_TO_FG_SERIAL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Unload.End
+
+Program.Sub.LoadGrid.Start
+F.Intrinsic.Control.SetErrorHandler("LoadGrid_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'Get next finished good serial number available for that part
+V.Local.sSql.Declare(String)
+V.Local.iRows.Declare(Float)
+V.local.i.Declare(Float)
+V.Local.sSerial.Declare(String)
+V.Local.iSerial.Declare(Float)
+
+'Load Options for FG DropDown
+Gui.SS_Form_WIP2FGSerial.ddlFGOption.ClearItems
+Gui.SS_Form_WIP2FGSerial.ddlFGOption.AddItem("")
+Gui.SS_Form_WIP2FGSerial.ddlFGOption.AddItem("Parent")
+Gui.SS_Form_WIP2FGSerial.ddlFGOption.AddItem("Sub-Assembly")
+
+'Load WO Detail at top
+Gui.SS_Form_WIP2FGSerial.txtJob.Text(V.Global.sJob)
+Gui.SS_Form_WIP2FGSerial.txtSuffix.Text(V.Global.sSuf)
+Gui.SS_Form_WIP2FGSerial.txtPart.Text(V.Global.sPart)
+
+'Load next available serials to choose from
+F.Intrinsic.String.Build("Select Max(Serial) as NEXT_SERIAL from GCG_3978_PART_SERIAL where PART = '{0}'",V.Global.sPart,V.Local.sSql)
+F.ODBC.Connection!conX.OpenRecordsetRO("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+	V.Local.sSerial.Set(V.ODBC.conX!rst.FieldVal!NEXT_SERIAL)
+F.Intrinsic.Control.EndIf
+F.ODBC.conX!rst.Close
+
+'check to see if available number and increment, else set to 00001
+F.Intrinsic.Control.If(V.Local.sSerial.Trim,<>,"")
+	F.Intrinsic.Math.ConvertToFloat(V.Local.sSerial,V.Local.iSerial)
+	F.Intrinsic.Math.Add(V.Local.iSerial,1,V.Local.iSerial)
+F.Intrinsic.Control.Else
+	V.Local.iSerial.Set(1)
+F.Intrinsic.Control.EndIf
+
+'set number of rows before loading
+F.Intrinsic.Math.Add(V.Global.iQty,1,V.Local.iRows)
+Gui.SS_Form_WIP2FGSerial.gsfg_Serials.Rows(V.Local.iRows)
+F.Intrinsic.Math.Sub(V.Local.iRows,1,V.Local.iRows)
+
+'load serials
+F.Intrinsic.Control.For(V.Local.i,1,V.Local.iRows,1)
+	F.Intrinsic.String.ConvertToString(V.Local.iSerial,V.Local.sSerial)
+	F.Intrinsic.String.LPad(V.Local.sSerial,"0",5,V.Local.sSerial)
+	Gui.SS_Form_WIP2FGSerial.gsfg_Serials.TextMatrix(1,V.Local.i,V.Local.sSerial)
+	Gui.SS_Form_WIP2FGSerial.gsfg_Serials.TextMatrix(0,V.Local.i,V.Local.i)
+	Gui.SS_Form_WIP2FGSerial.gsfg_Serials.ApplyStyle(V.Local.i,1)
+	F.Intrinsic.Math.Add(V.Local.iSerial,1,V.Local.iSerial)
+F.Intrinsic.Control.Next(V.Local.i)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("LoadGrid_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_WIP_TO_FG_SERIAL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.LoadGrid.End
+
+Program.Sub.BuildStyle.Start
+F.Intrinsic.Control.SetErrorHandler("BuildStyle_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'Buildstyle for serial grid
+
+Gui.SS_Form_WIP2FGSerial.gsfg_Serials.Cols(2)
+Gui.SS_Form_WIP2FGSerial.gsfg_Serials.Rows(1)
+Gui.SS_Form_WIP2FGSerial.gsfg_Serials.Rows(2)
+Gui.SS_Form_WIP2FGSerial.gsfg_Serials.FixedRows(1)
+Gui.SS_Form_WIP2FGSerial.gsfg_Serials.FixedCols(1)
+
+Gui.SS_Form_WIP2FGSerial.gsfg_Serials.TextMatrix(1,0,"Serial #")
+Gui.SS_Form_WIP2FGSerial.gsfg_Serials.BuildStyle(1,1,"Format","Alignment",2)
+Gui.SS_Form_WIP2FGSerial.gsfg_Serials.BuildStyle(1,0,"Format","Alignment",2)
+Gui.SS_Form_WIP2FGSerial.gsfg_Serials.BuildStyle(1,1,"Type","Locked",True)
+
+Gui.SS_Form_WIP2FGSerial.gsfg_Serials.SetColumnPercentages(".25:.75")
+Gui.SS_Form_WIP2FGSerial.gsfg_Serials.ApplyStyle(1,1)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("BuildStyle_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_WIP_TO_FG_SERIAL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.BuildStyle.End
+
+program.sub.cmdsave_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdsave_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iRows.Declare(Float)
+V.Local.sRow.Declare(String)
+V.Local.sSql.Declare(String)
+V.Local.i.Declare(String)
+V.Local.sTemp.Declare(String)
+V.Local.sFGOpt.Declare(String)
+V.Local.iRecID.Declare(Long)
+'Set boolean to 0 or 1 for BIT value in table
+V.Local.bSubAssmebly.Declare(Long)
+V.Local.bExists.Declare(Boolean)
+
+V.Local.sFile.Declare(String)
+V.Local.sFileContents.Declare(String)
+
+'Save records to custom table and disable grid and save button
+'screen is asynch so they will just close it after finishing wiptoFG core process
+
+'Check to make sure if part is described as Sub-Assembly or Parent, Cannot Be Blank
+V.Local.sFGOpt.Set(V.Screen.SS_Form_WIP2FGSerial!ddlFGOption.Text)
+F.Intrinsic.Control.If(V.Local.sFGOpt.Trim,=,"")
+	F.Intrinsic.UI.Msgbox("Must Select Finished Good Option (Parent/Sub-Assembly)","Select Finished Good Part Option")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Else
+	F.Intrinsic.Control.If(V.Local.sFGOpt,=,"Parent")
+		V.Local.bSubAssmebly.Set(0)
+	F.Intrinsic.Control.Else
+		V.Local.bSubAssmebly.Set(1)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+f.ODBC.Connection!conX.GetID("GCG_3978_PART_SERIAL","REC_ID",true,v.Local.iRecID)
+
+'Save Records to Custom Table
+V.Local.iRows.Set(V.Screen.SS_Form_WIP2FGSerial!gsfg_Serials.Rows)
+F.Intrinsic.Math.Sub(V.Local.iRows,1,V.Local.iRows)
+F.Intrinsic.Control.For(V.Local.i,1,V.Local.iRows,1)
+	Gui.SS_Form_WIP2FGSerial.gsfg_Serials.ReadRow(V.Local.i,V.Local.sRow)
+	F.Intrinsic.String.Split(V.Local.sRow,"*!*",V.Local.sRow)
+	F.ODBC.Connection!conX.OpenRecordsetRW("rst","SELECT * from GCG_3978_PART_SERIAL")
+	F.ODBC.conX!rst.AddNew
+	F.ODBC.conX!rst.Set!REC_ID(V.Local.iRecID)
+	F.ODBC.conX!rst.Set!PART(V.Global.sPart)
+	F.ODBC.conX!rst.Set!SERIAL(V.Local.sRow(1))
+	F.ODBC.conX!rst.Set!JOB(V.Global.sJob)
+	F.ODBC.conX!rst.Set!JOB_SUFFIX(V.Global.sSuf)
+	F.ODBC.conX!rst.Set!ORDER_NO(V.Global.sOrderNo)
+	F.ODBC.conX!rst.Set!ORDER_LINE(V.Global.sOrderLine)
+	F.ODBC.conX!rst.Set!SUB_ASSEMBLY(V.Local.bSubAssmebly)
+	F.ODBC.conX!rst.Update
+	F.ODBC.conX!rst.Close
+	F.Intrinsic.Math.Add(V.Local.iRecID,1,V.Local.iRecID)
+	'pass all serials saved the v.passed.GLOBAL split on "*!*" and every time they hit save on the core screen will move to the next one.
+	'build string to pass to GLOBAL VARIABLE that will control what serial numbers are saved on the core side
+	F.Intrinsic.String.Build("{0}{1}-",V.Local.sTemp,V.Local.sRow(1),V.Local.sTemp)
+F.Intrinsic.Control.Next(V.Local.i)
+
+'Get rid of last *!*
+F.Intrinsic.String.IsInString(V.Local.sTemp,"-",True,V.Local.bExists)
+F.Intrinsic.Control.If(V.Local.bExists,=,True)
+	F.Intrinsic.String.Len(V.Local.sTemp.Trim,V.Local.i)
+	F.Intrinsic.Math.Sub(V.Local.i,1,V.Local.i)
+	F.Intrinsic.String.Left(V.Local.sTemp,V.Local.i,V.Local.sTemp)
+F.Intrinsic.Control.EndIf
+
+V.Passed.GLOBAL.Set(V.Local.sTemp)
+V.Passed.000015.Set(1)
+F.Intrinsic.String.Split(V.Local.sTemp,"-",V.Local.sTemp)
+V.Passed.000014.Set(V.Local.sTemp(0).Trim)
+
+'Write temp file to use inscase user cancels out of parent screen, you can delete the records
+'txt file is JOB-SUFFIX-PART.tx
+F.Intrinsic.String.Build("{0}\{1}-{2}-{3}.txt",V.Caller.PluginsDir,V.Global.sJob,V.Global.sSuf,V.Global.sPart,V.Local.sFile)
+F.Intrinsic.File.Exists(V.Local.sFile,V.Local.bExists)
+F.Intrinsic.Control.If(V.Local.bExists,=,True)
+	F.Intrinsic.File.DeleteFile(V.Local.sFile)
+F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.For(V.Local.i,V.Local.sTemp.LBound,V.Local.sTemp.UBound,1)
+	F.Intrinsic.String.Build("{0}{1}{2}",V.Local.sFileContents,V.Local.sTemp(v.Local.i),V.Ambient.NewLine,V.Local.sFileContents)
+F.Intrinsic.Control.Next(V.Local.i)
+
+F.Intrinsic.File.String2File(V.Local.sFile,V.Local.sFileContents)
+
+F.Intrinsic.Control.CallSub(Unload)
+
+F.Intrinsic.Control.Label("cmdsave_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_WIP_TO_FG_SERIAL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdsave_click.end
+
+Program.Sub.LoadNextSerial.Start
+F.Intrinsic.Control.SetErrorHandler("LoadNextSerial_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.i.Declare(String)
+V.Local.sSerials.Declare(String)
+V.Local.sTemp.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.bExists.Declare(Boolean)
+
+V.Local.sSerials.Set(V.Passed.GLOBAL)
+
+'Get rid of saved serial and reload the split string of remaining serial numbers
+F.Intrinsic.Control.If(V.Local.sSerials.Trim,<>,"")
+	F.Intrinsic.String.Split(V.Local.sSerials,"-",V.Local.sSerials)
+	F.Intrinsic.Control.If(V.Local.sSerials.UBound,>,0)
+		F.Intrinsic.Control.For(V.Local.i,1,V.Local.sSerials.UBound,1)
+			F.Intrinsic.Control.If(V.Local.i,<>,V.Local.sSerials.UBound)
+				F.Intrinsic.String.Build("{0}{1}-",V.Local.sTemp,V.Local.sSerials(v.Local.i),V.Local.sTemp)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.String.Build("{0}{1}",V.Local.sTemp,V.Local.sSerials,V.Local.sTemp)
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.Next(V.Local.i)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+'Get rid of last *!*
+F.Intrinsic.String.IsInString(V.Local.sTemp,"-",True,V.Local.bExists)
+F.Intrinsic.Control.If(V.Local.bExists,=,True)
+	F.Intrinsic.String.Len(V.Local.sTemp.Trim,V.Local.i)
+	F.Intrinsic.Math.Sub(V.Local.i,1,V.Local.i)
+	F.Intrinsic.String.Left(V.Local.sTemp,V.Local.i,V.Local.sTemp)
+F.Intrinsic.Control.EndIf
+
+'reload it with remaining serials
+V.Passed.GLOBAL.Set(V.Local.sTemp)
+F.Intrinsic.Control.If(V.Local.sTemp.Trim,<>,"")
+	F.Intrinsic.String.Split(V.Local.sTemp,"-",V.Local.sTemp)
+	V.Passed.000014.Set(V.Local.sTemp(0).Trim)
+	V.Passed.000015.Set(1)
+F.Intrinsic.Control.EndIf
+
+
+F.Intrinsic.Control.CallSub(Unload)
+
+F.Intrinsic.Control.Label("LoadNextSerial_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_WIP_TO_FG_SERIAL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.LoadNextSerial.End
+
+Program.Sub.DeleteLotSerial.Start
+F.Intrinsic.Control.SetErrorHandler("DeleteLotSerial_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'This will delete records that were saved to custom table if user hits cancel or exits without saving.
+V.Local.sFile.Declare(String)
+V.Local.sTemp.Declare(String)
+V.Local.sSerial.Declare(String)
+V.Local.bExists.Declare(Boolean)
+V.Local.i.Declare(Long)
+V.Local.sSql.Declare(String)
+
+'Delete File and Delete Records that were saved previously in the GAB screen
+F.Intrinsic.String.Build("{0}\{1}-{2}-{3}.txt",V.Caller.PluginsDir,V.Passed.000003,V.Passed.000004,V.Passed.000009,V.Local.sFile)
+F.Intrinsic.File.Exists(V.Local.sFile,V.Local.bExists)
+F.Intrinsic.Control.If(V.Local.bExists,=,True)
+	F.Intrinsic.File.File2String(V.Local.sFile,V.Local.sTemp)
+	'On save hook make sure user saved all serials that were saved on the GAB screen, checking item history table
+	'if no record exists in the item history table then delete the record from the custom table
+	F.Intrinsic.Control.If(V.Caller.Hook,=,16504)
+		F.Intrinsic.UI.Sleep(15)
+		F.Intrinsic.String.Split(V.Local.sTemp,V.Ambient.NewLine,V.Local.sTemp)
+		F.Intrinsic.Control.For(V.Local.i,V.Local.sTemp.LBound,V.Local.sTemp.UBound,1)
+			F.Intrinsic.String.Build("Select * from v_ITEM_HISTORY where JOB = '{0}' and SUFFIX = '{1}' and PART = '{2}' and SERIAL = '{3}'",V.Passed.000003,V.Passed.000004,V.Passed.000009,V.Local.sTemp(v.Local.i).Trim,V.Local.sSql)
+			F.ODBC.Connection!conX.OpenRecordsetRO("rst",V.Local.sSql)
+			F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,=,True)
+				F.Intrinsic.String.Build("Delete from GCG_3978_PART_SERIAL where JOB = '{0}' and JOB_SUFFIX = '{1}' and PART = '{2}' and SERIAL = '{3}'",V.Passed.000003,V.Passed.000004,V.Passed.000009,V.Local.sTemp(v.Local.i).Trim,V.Local.sSql)
+			F.Intrinsic.Control.EndIf
+			F.ODBC.conX!rst.Close
+		F.Intrinsic.Control.Next(V.Local.i)
+	F.Intrinsic.Control.EndIf
+	F.Intrinsic.File.DeleteFile(V.Local.sFile)
+	F.Intrinsic.Control.If(V.Caller.Hook,=,16506,"OR",V.Caller.Hook,=,16508)
+		F.Intrinsic.String.Split(V.Local.sTemp,V.Ambient.NewLine,V.Local.sTemp)
+		F.Intrinsic.Control.For(V.Local.i,V.Local.sTemp.LBound,V.Local.sTemp.UBound,1)
+			'delete serial record from custom table because it was never saved to Core Lot Serial Records
+			F.Intrinsic.String.Build("Delete from GCG_3978_PART_SERIAL where JOB = '{0}' and JOB_SUFFIX = '{1}' and PART = '{2}' and SERIAL = '{3}'",V.Passed.000003,V.Passed.000004,V.Passed.000009,V.Local.sTemp(v.Local.i).Trim,V.Local.sSql)
+			F.ODBC.Connection!conX.Execute(V.Local.sSql)
+		F.Intrinsic.Control.Next(V.Local.i)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("DeleteLotSerial_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3978_WIP_TO_FG_SERIAL.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.DeleteLotSerial.End
+
+Program.Sub.Comments.Start
+${$0$}$GCG_DD_WIP_TO_FG_SERIAL$}$SUPERVSR$}$4/30/2015
+${$3$}$0$}$$}$-1$}$-1$}$$}$1/1/1900$}$This will come up with serial numbers for Finished Good parts on sub assemblies. User will assign the Serial Numbers first with the GAB program fired asynch on the Hook 16500, they can again access the saved information on the script button 16540. Both from WIP to FG Lot/Bin/Serial Screen JB0052-JBS0052L. It will take the total quantity of finished goods and populate the next available serial numbers for that part.
+Program.Sub.Comments.End
+Program.Sub.ScreenSS.Start
+SS_Form1{{CAPTION::Assign Finished Good Serials
+SS_Form1.CTRL{{NAME::txtJob\\TYPE::2\\CAPTION::Work Order\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::txtSuffix\\TYPE::2\\CAPTION::Suffix\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::txtPart\\TYPE::2\\CAPTION::Part\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::lblGSFGSerials\\TYPE::1\\CAPTION::Serial Numbers to Assign\\GROUP::-1\\BROWSER::0\\SIZE::1
+
+Program.Sub.ScreenSS.End
+
